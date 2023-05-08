@@ -1,0 +1,49 @@
+
+/* ***************** */
+/* dialog boxes all */
+/* ******************** */
+.dialog{
+    width: 50vw;
+    height: 50vh;
+    position: relative;
+}
+.top-bar{
+    background-color: rgb(180, 180, 180);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 1.5em;
+}
+.close-button{
+    background-color: rgba(255, 0, 0, 0.192);
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    justify-self: flex-end;
+    align-self: center;
+    margin-right: 5px;
+}
+.close-button:after{
+    display: inline-block;
+    content: "\00d7"; 
+}
+h2 {
+    text-align: center;
+    margin: 0;
+    margin-left: 10px; 
+}
+.dialog-content-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Folder */
+.folder{
+    font-size: 5rem;
+}
