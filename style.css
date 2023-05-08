@@ -47,3 +47,28 @@ h2 {
 .folder{
     font-size: 5rem;
 }
+
+/* Rechner Item */
+.icon{
+    width: 75px;
+    height: 75px;
+}
+img{
+    height: 100%;
+}
+.item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.componentItems{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-height: 90vh;
+
+}
