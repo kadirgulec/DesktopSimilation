@@ -1,5 +1,5 @@
 let itemCounter = 0;
-const dialogCodes = {
+/* const dialogCodes = {
     Rechner : `<dialog class="dialog dialog1" id="item${this.itemnr}">
                     <div class="top-bar">
                         <h2>About Me</h2>
@@ -37,7 +37,7 @@ const dialogCodes = {
                         </div>
                     </div>
                 </dialog>`
-}
+} */
 let itemIdArray=[];
 
 class item {
@@ -54,7 +54,7 @@ class item {
    
     create(){
         this.componentItems.innerHTML += 
-                                    `<div class="item" id="item${this.itemnr}" onclick="item${this.itemnr}.clicked(${this.itemnr})" ondblclick="item${this.itemnr}.doubleClicked(${this.itemnr},${this.label})}">
+                                    `<div class="item" id="item${this.itemnr}" onclick="item${this.itemnr}.clicked(${this.itemnr})" ondblclick="item${this.itemnr}.doubleClicked(${this.itemnr},${this.label})">
                                         <div class="icon"><img src= "${this.icon}" alt=""></div>
                                         <div class="label">${this.label}</div>
                                     </div>`; 
@@ -80,10 +80,11 @@ class item {
         this.item.style.backgroundColor= "rgba(56, 56, 190, 0.521)";
     
     }
-    doubleClicked(number, itemId){
+    doubleClicked(number, codeShortCut){
+        this.dialogBoxes = document.querySelector(".dialogBoxes");
         console.log(this.dialogBoxes);
 
-        window_tab = document.querySelector(`#item${itemId}`);
+        window_tab = document.querySelector(`#item${number}`);
         window_tab.showModal(); // Opens a modal
        
 
