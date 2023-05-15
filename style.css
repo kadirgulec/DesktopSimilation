@@ -1,4 +1,12 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+p{
+    margin: 2rem;
+    padding: 1rem;
+}
 /* ***************** */
 /* dialog boxes all */
 /* ******************** */
@@ -6,6 +14,8 @@
     width: 50vw;
     height: 50vh;
     position: relative;
+    margin: auto;
+    
 }
 .top-bar{
     background-color: rgb(180, 180, 180);
@@ -65,11 +75,78 @@ img{
     border-radius: 5px;
 }
 
+
 .componentItems{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: wrap;
     max-height: 90vh;
+}
 
+body{
+    background-image: url(https://c4.wallpaperflare.com/wallpaper/344/958/356/windows-10-windows-10-anniversary-logo-hd-wallpaper-preview.jpg);
+    background-position: center;
+    background-size: cover;
+    /* display: flex;
+    flex-direction: column;
+    height: 100vh;
+    
+    border: 2px solid black; */
+}
+/* ******************* */
+/* Footer */
+/* ******************* */
+footer{
+   
+    height: 6%;
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color: white;
+    
+    
+    
+    
+}
+.taskMenuWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+footer .startMenu{
+    color: white;
+    height: 100%;
+    width: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px white solid;
+    font-size: 2em;
+}
+footer .startMenu:hover{
+    background-color: rgba(112, 112, 112, 0.233);
+    color: rgba(84, 147, 241, 0.473);
+}
+footer .time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#startMenu{
+    position: fixed;
+    bottom: 6vh;
+    padding: 5px;
+    
+}
+ul{
+    list-style: none;
+}
+ul li{
+    margin: 5px;
 }

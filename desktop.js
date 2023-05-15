@@ -42,7 +42,20 @@ Contact:`<form action="">
 <input type="submit" value="Senden">
 </form>`
 }
+const startMenuIcons = {
+Rechner : `<i class="fa-solid fa-calculator"></i>`,
+AboutMe : `<i class="fa-solid fa-address-card"></i>`,
+Contact : `<i class="fa-solid fa-envelope-open-text"></i>`
+}
 let itemIdArray=[];
+let itemLabelArray = [];
+let itemIconArray = [];
+function resetBackgroundOfSelectedIcon(){
+    for (let i = 0; i < itemIdArray.length; i++){
+        let itemid = document.getElementById(`item${i}`);
+        itemid.style.backgroundColor = "rgba(255, 255, 255, 0)";
+    }
+}
 class item {
     constructor(icon, label){
         this.icon = icon;
@@ -63,6 +76,8 @@ class item {
                                     </div>`; 
         this.item = document.getElementById(`item${this.itemnr}`);
         itemIdArray.push(this.itemnr);
+        itemLabelArray.push(this.label);
+        itemIconArray.push(this.icon);
         
         /* this.item.addEventListener('click', () => this.clicked(itemIdArray[this.itemnr])); */
     
@@ -78,10 +93,7 @@ class item {
     clicked(number){
         this.item = document.getElementById(`item${number}`);
     
-        for (let i = 0; i < itemIdArray.length; i++){
-            let itemid = document.getElementById(`item${i}`);
-            itemid.style.backgroundColor = "rgba(255, 255, 255, 0)";
-        }
+        resetBackgroundOfSelectedIcon();
         
         this.item.style.backgroundColor= "rgba(56, 56, 190, 0.521)";
     
@@ -101,21 +113,71 @@ class item {
         let window_tab = document.querySelector(`#${label}${number}`);
         window_tab.showModal(); // Opens a modal
 
-        for (let i = 0; i < itemIdArray.length; i++){
-            let itemid = document.getElementById(`item${i}`);
-            itemid.style.backgroundColor = "rgba(255, 255, 255, 0)";
-        }
+       resetBackgroundOfSelectedIcon();
     }
     closeTab (number, label) {
         let window_tab = document.getElementById(`${label}${number}`);
         window_tab.close();
 
-        for (let i = 0; i < itemIdArray.length; i++){
-            let itemid = document.getElementById(`item${i}`);
-            itemid.style.backgroundColor = "rgba(255, 255, 255, 0)";
-        }
+        resetBackgroundOfSelectedIcon();
        
     }
     
 }
+/* date and time */
+function printDate(){
+    const date = new Date();
+    console.log(date);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    if (day < 10){
+        day = `0` + day;
+    }
+    if (month < 10){
+        month = "0" + month;
+    }
+    let fullDate = `${day}.${month}.${year}`;
+    console.log(fullDate);
+    
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    if (hour < 10){
+        hour = "0" + hour;
+    }
+    if (minute < 10){
+        minute = "0" + minute;
+    }
+    let fullTime = `${hour}:${minute}`;
+    console.log(fullTime);
 
+    let printhour = document.querySelector(".hour");
+    let printdate = document.querySelector(".date");
+    printhour.innerHTML = fullTime;
+    printdate.innerHTML = fullDate; 
+   
+
+
+}
+
+setInterval(printDate, 10000);
+
+/* date and time end */
+
+/* start menu */
+
+function startMenuOpen(){
+    let startMenu = document.querySelector("#startMenu");
+    let startMenuList = document.querySelector("#startMenuList");
+    startMenuList.innerHTML = "";
+    for (i = 0; i < itemLabelArray.length; i++ ){
+        startMenuList.innerHTML += `<li onclick="item${i}.doubleClicked('${itemIdArray[i]}','${itemLabelArray[i]}')">${startMenuIcons[itemLabelArray[i]]} ${itemLabelArray[i]}</li>`
+    }
+    resetBackgroundOfSelectedIcon();
+    startMenu.show();
+}
+
+function startMenuClose(){
+    let startMenu = document.querySelector("#startMenu");
+    startMenu.close();
+}
