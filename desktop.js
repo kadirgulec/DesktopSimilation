@@ -50,6 +50,7 @@ Contact : `<i class="fa-solid fa-envelope-open-text"></i>`
 let itemIdArray=[];
 let itemLabelArray = [];
 let itemIconArray = [];
+
 function resetBackgroundOfSelectedIcon(){
     for (let i = 0; i < itemIdArray.length; i++){
         let itemid = document.getElementById(`item${i}`);
