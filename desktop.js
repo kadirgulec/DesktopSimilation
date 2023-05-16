@@ -1,4 +1,7 @@
-let itemCounter = 0;
+let itemCounter = 0; //this is to find the id of the html elements that created by the classes
+
+/* This object is used to hold the codes of the elements of the class */
+/* The object name is the same as the class label, so it can automatically take the code */
 const dialogCodes = {
     Rechner : `<div class="dialog-content-wrapper">
     <div class="dialog-content">
@@ -42,21 +45,28 @@ Contact:`<form action="">
 <input type="submit" value="Senden">
 </form>`
 }
+
+/* this icons are for the start menu */
 const startMenuIcons = {
 Rechner : `<i class="fa-solid fa-calculator"></i>`,
 AboutMe : `<i class="fa-solid fa-address-card"></i>`,
 Contact : `<i class="fa-solid fa-envelope-open-text"></i>`
 }
+
+/* Array to find the id, label or icon (Start Menu) */
 let itemIdArray=[];
 let itemLabelArray = [];
 let itemIconArray = [];
 
+/* this function makes the background of the desktop icons transparant */
 function resetBackgroundOfSelectedIcon(){
     for (let i = 0; i < itemIdArray.length; i++){
         let itemid = document.getElementById(`item${i}`);
         itemid.style.backgroundColor = "rgba(255, 255, 255, 0)";
     }
 }
+
+
 class item {
     constructor(icon, label){
         this.icon = icon;
@@ -68,37 +78,38 @@ class item {
         this.dialogBoxes = document.querySelector(".dialogBoxes");
 
     }
-   
+   //to create the desktop icons, with onclick and ondbclick functions
     create(){
         this.componentItems.innerHTML += 
                                     `<div class="item" id="item${this.itemnr}" onclick="item${this.itemnr}.clicked(${this.itemnr})" ondblclick="item${this.itemnr}.doubleClicked('${this.itemnr}','${this.label}')">
-                                        <div class="icon"><img src= "${this.icon}" alt=""></div>
+                                        <div class="icon"><img src= "${this.icon}" alt="${this.label}"></div>
                                         <div class="label">${this.label}</div>
                                     </div>`; 
         this.item = document.getElementById(`item${this.itemnr}`);
         itemIdArray.push(this.itemnr);
         itemLabelArray.push(this.label);
         itemIconArray.push(this.icon);
-        
-        /* this.item.addEventListener('click', () => this.clicked(itemIdArray[this.itemnr])); */
-    
-        
     }
+
     getItemNr(){
         return this.itemnr;
     }
+
     getItemLabel(){
         return this.label
     }
 
+    // if it is one time clicked, the background will change to blue(kind of :)) 
     clicked(number){
         this.item = document.getElementById(`item${number}`);
     
-        resetBackgroundOfSelectedIcon();
+        resetBackgroundOfSelectedIcon(); //all icons background will be transparant
         
         this.item.style.backgroundColor= "rgba(56, 56, 190, 0.521)";
     
     }
+
+    //the code will be pasted in html and also it will open the dialog box (like a window in windows)
     doubleClicked(number,label){
         this.dialogBoxes = document.querySelector(".dialogBoxes")
     
@@ -109,7 +120,7 @@ class item {
                     </div>
                     </dialog>`;
         let contentDialog = document.querySelector(`#${label}${number}`);
-        contentDialog.innerHTML += dialogCodes[label];
+        contentDialog.innerHTML += dialogCodes[label]; //that is new for me, to paste an element of an object in html, i have to use "[]" instead of "."
 
         let window_tab = document.querySelector(`#${label}${number}`);
         window_tab.showModal(); // Opens a modal
@@ -128,10 +139,11 @@ class item {
 /* date and time */
 function printDate(){
     const date = new Date();
-    console.log(date);
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
+
+    //if it is smaller than 10, i want it to show with 0 like 09 instead of just 9
     if (day < 10){
         day = `0` + day;
     }
@@ -139,7 +151,7 @@ function printDate(){
         month = "0" + month;
     }
     let fullDate = `${day}.${month}.${year}`;
-    console.log(fullDate);
+    
     
     let hour = date.getHours();
     let minute = date.getMinutes();
@@ -150,7 +162,7 @@ function printDate(){
         minute = "0" + minute;
     }
     let fullTime = `${hour}:${minute}`;
-    console.log(fullTime);
+    
 
     let printhour = document.querySelector(".hour");
     let printdate = document.querySelector(".date");
@@ -160,7 +172,7 @@ function printDate(){
 
 
 }
-
+//the time will be refreshed every 10 seconds
 setInterval(printDate, 10000);
 
 /* date and time end */
@@ -170,7 +182,9 @@ setInterval(printDate, 10000);
 function startMenuOpen(){
     let startMenu = document.querySelector("#startMenu");
     let startMenuList = document.querySelector("#startMenuList");
-    startMenuList.innerHTML = "";
+    startMenuList.innerHTML = ""; //this will reset the added start menu elements, to avoid having the elements more time if it is clicked more than once
+
+    /* add all created desktop items to start menu with their icons from the object of icons */
     for (i = 0; i < itemLabelArray.length; i++ ){
         startMenuList.innerHTML += `<li onclick="item${i}.doubleClicked('${itemIdArray[i]}','${itemLabelArray[i]}')">${startMenuIcons[itemLabelArray[i]]} ${itemLabelArray[i]}</li>`
     }
